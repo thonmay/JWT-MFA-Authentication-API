@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT MFA API Tester</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>JWT MFA API Tester</h1>
+    <div id="responseArea" aria-live="polite"></div>
+</header>
+
+<main>
+    <section class="auth-section">
+        <article class="card">
+            <h2>Register</h2>
+            <form id="registerForm">
+                <input type="text" id="regUsername" placeholder="Username" required aria-label="Username for registration">
+                <input type="password" id="regPassword" placeholder="Password" required aria-label="Password for registration">
+                <button type="submit">Register</button>
+            </form>
+        </article>
+
+        <article class="card">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="text" id="loginUsername" placeholder="Username" required aria-label="Username for login">
+                <input type="password" id="loginPassword" placeholder="Password" required aria-label="Password for login">
+                <button type="submit">Login</button>
+            </form>
+        </article>
+
+        <article class="card hidden" id="mfaCard">
+            <h2>Verify MFA</h2>
+            <form id="mfaForm">
+                <input type="text" id="mfaUsername" readonly aria-label="Username for MFA verification">
+                <input type="text" id="mfaCode" placeholder="6-digit code" required aria-label="6-digit MFA code" pattern="[0-9]{6}" maxlength="6">
+                <button type="submit">Verify & Get Token</button>
+            </form>
+        </article>
+    </section>
+
+    <section class="api-section">
+        <article class="card">
+            <h2>Protected Endpoints</h2>
+            <p>Access protected data using your JWT token</p>
+            <div class="button-group">
+                <button id="getUserDataBtn" type="button">Get User Data</button>
+                <button id="getAdminDataBtn" type="button">Get Admin Data</button>
+            </div>
+        </article>
+
+        <article class="card">
+            <h2>MFA Setup</h2>
+            <p>Configure two-factor authentication for enhanced security</p>
+            <button id="setupMfaBtn" type="button">Setup MFA</button>
+
+            <div id="qrCodeArea" class="qr-container"></div>
+
+            <form id="verifyMfaSetupForm" class="hidden">
+                <input type="text" id="verifyMfaSetupCode" placeholder="6-digit code" required aria-label="6-digit code to verify MFA setup" pattern="[0-9]{6}" maxlength="6">
+                <button type="submit">Verify & Enable MFA</button>
+            </form>
+        </article>
+    </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
